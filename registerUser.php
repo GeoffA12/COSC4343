@@ -9,7 +9,7 @@
 
         if ($conn -> connect_errno ) {
             echo 'Failed to connect to mysql: ' . $conn -> connect_error;
-            die('Failed to connect to mysql')
+            die('Failed to connect to mysql');
         }
 
         $username = $_POST['username'];
