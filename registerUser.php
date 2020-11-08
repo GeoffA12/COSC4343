@@ -12,7 +12,8 @@
             $dbhost = 'localhost:3306';
             $dbuser = 'root';
             $dbpassword = 'COSC4343';
-            $conn = mysql_connect($dbhost, $dbuser, $dbpassword);
+            $dbname = 'cosc4343';
+            $conn = mysql_connect($dbhost, $dbuser, $dbpassword, $dbname);
 
             if (! $conn ) {
                 echo 'Could not connect';
