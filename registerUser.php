@@ -8,7 +8,7 @@
 <body>
     <?php
         if (isset($POST['addUser'])) {
-            $dbhost = 'localhost';
+            $dbhost = 'localhost:3306';
             $dbuser = 'root';
             $dbpassword = 'COSC4343';
             $conn = mysql_connect($dbhost, $dbuser, $dbpassword);
