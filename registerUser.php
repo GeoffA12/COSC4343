@@ -15,7 +15,6 @@
 
             if ($conn -> connect_errno ) {
                 echo 'Failed to connect to mysql: ' . $conn -> connect_error;
-                die('Failed to connect to mysql');
             }
 
             $username = $_POST['username'];
@@ -26,7 +25,6 @@
 
             if (!in_array($clearance, $clearance_array)) {
                 echo 'Clearance value not in array of values for acceptable clearance';
-                return;
             }
 
             $hashPassword = sha1($password);
