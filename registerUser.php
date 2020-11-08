@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a New User Record into MySQL Database</title>
 </head>
 <body>
@@ -13,11 +11,11 @@
             $dbuser = 'root';
             $dbpassword = 'COSC4343';
             $dbname = 'cosc4343';
-            $conn = mysql_connect($dbhost, $dbuser, $dbpassword, $dbname);
+            $conn = new mysqli($dbhost, $dbuser, $dbpassword, $dbname);
 
-            if (! $conn ) {
-                echo 'Could not connect';
-                die('Could not connect: ' . mysql_error());
+            if ($conn -> connect_errno ) {
+                echo 'Failed to connect to mysql: ' . $conn -> connect_error;
+                die('Failed to connect to mysql');
             }
 
             $username = $_POST['username'];
@@ -37,14 +35,11 @@
             "(username, password, clearance) " . " VALUES " . 
             "('$username', '$hashPassword', '$clearance')";
             
-            $retVal = mysql_query( $sql, $conn );
-            if (! $retVal ) {
-                echo 'No return value from database';
-                die('Could not insert data: ' . mysql_error());
+            if ($result = $conn -> query($sql)) {
+                echo "Returned rows are: " . $result -> num_rows;
+                $result -> free_result();
             }
-
-            echo "Registered new user successfully";
-            mysql_close($conn);
+            $conn -> close();
         } else {
     ?>
 
