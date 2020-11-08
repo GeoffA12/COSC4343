@@ -40,8 +40,6 @@
 
             echo "Registered new user successfully";
             mysql_close($conn);
-        } else {
-            echo "Invalid path to addUser";
         }
     ?>
 
