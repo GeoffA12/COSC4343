@@ -44,7 +44,7 @@
 
             echo "Registered new user successfully";
             mysql_close($conn);
-        }
+        } else {
     ?>
 
     <form method ="post" action ="<?php $PHP_SELF ?>">
@@ -78,5 +78,8 @@
             </tr>
         </table>
     </form>
+    <?php
+        }
+    ?>
 </body>
 </html>
