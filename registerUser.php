@@ -8,6 +8,7 @@
 <body>
     <?php
         if (isset($POST['addUser'])) {
+            echo 'Correct path used';
             $dbhost = 'localhost:3306';
             $dbuser = 'root';
             $dbpassword = 'COSC4343';
@@ -25,7 +26,8 @@
             $clearance_array = array('T', 'S', 'C', 'U');
 
             if (!in_array($clearance, $clearance_array)) {
-                throw new Exception('Clearance value should be T, S, C, or U');
+                echo 'Clearance value not in array of values for acceptable clearance';
+                return;
             }
 
             $hashPassword = sha1($password);
