@@ -14,6 +14,7 @@
             $conn = mysql_connect($dbhost, $dbuser, $dbpassword);
 
             if (! $conn ) {
+                echo 'Could not connect';
                 die('Could not connect: ' . mysql_error());
             }
 
@@ -35,6 +36,7 @@
             
             $retVal = mysql_query( $sql, $conn );
             if (! $retVal ) {
+                echo 'No return value from database';
                 die('Could not insert data: ' . mysql_error());
             }
 
