@@ -1,5 +1,5 @@
 <?php
-    if (isset($POST['addUser'])) {
+    if (isset($_POST['addUser'])) {
         echo 'Correct path used';
         $dbhost = 'localhost:3306';
         $dbuser = 'root';
