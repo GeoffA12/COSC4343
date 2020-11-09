@@ -31,7 +31,9 @@
         echo "<br>";
         echo $result;
 
+        echo "Before the if block";
         if ($result -> num_rows > 0) {
+            echo "result found";
             while ($row = $result -> mysql_fetch_assoc()) {
                 echo "username: " . $row["username"] . "clearance: " . $row["clearance"] . "<br>";
             }
