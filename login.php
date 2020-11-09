@@ -24,7 +24,7 @@
         $sql = "SELECT * FROM useraccounts";
         echo $sql;
 
-        if ($result = $mysqli->query($sql)) {
+        if ($result = $conn->query($sql)) {
             printf("Select returned %d rows.\n", $result->num_rows);
             $result->close();
         } else {
