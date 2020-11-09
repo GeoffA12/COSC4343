@@ -28,15 +28,9 @@
 
         $result = mysqli_query($conn, $sql);
 
-        print('Before the if block');
-        if ($result->num_rows > 0) {
-            echo "result found";
-            while ($row = $result->mysql_fetch_assoc()) {
-                echo "username: " . $row["username"] . "clearance: " . $row["clearance"] . "<br>";
-            }
-        } else {
-            print('0 results found');
-        }
+        $row = mysql_fetch_row($result);
+        $user = $row[0];
+        echo $user;
         
         // if (!$result) {
         //     $message = 'Invalid query ' . mysql_error() . "\n";
