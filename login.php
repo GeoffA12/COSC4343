@@ -16,10 +16,7 @@
 
         $hashPassword = sha1($password);
 
-        $sql = sprintf("SELECT username, clearance FROM useraccounts 
-        WHERE username='%s' AND password='%s'",
-        mysql_real_escape_string($username),
-        mysql_real_escape_string($hashPassword));
+        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
 
         $result = mysql_query($query);
         
