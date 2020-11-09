@@ -27,6 +27,8 @@
         if ($result = $mysqli->query($sql)) {
             printf("Select returned %d rows.\n", $result->num_rows);
             $result->close();
+        } else {
+            print('No result found');
         }
         
         // if (!$result) {
