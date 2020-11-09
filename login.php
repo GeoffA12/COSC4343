@@ -26,6 +26,9 @@
 
         if ($result = $conn->query($sql)) {
             printf("Select returned %d rows.\n", $result->num_rows);
+            while ($row = $result->fetch_assoc()) {
+                echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
+            }
             $result->close();
         } else {
             print('No result found');
