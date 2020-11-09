@@ -29,7 +29,8 @@
             // while ($row = $result->fetch_assoc()) {
             //     echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
             // }
-            $firstUser = $result->fetch_assoc();
+            $userArray = $result->fetch_assoc();
+            $firstUser = $userArray[0];
             echo $firstUser;
             $result->close();
         } else {
