@@ -15,22 +15,25 @@
         $password = $_POST['password'];
 
         $hashPassword = sha1($password);
+        echo $username;
 
-        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+        echo $hashPassword;
 
-        $result = mysql_query($query);
+        // $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+
+        // $result = mysql_query($query);
         
-        if (!$result) {
-            $message = 'Invalid query ' . mysql_error() . "\n";
-            $message .= "Whole query: " . $query;
-            echo $message;
-            return;
-        } else {
-            $row = mysql_fetch_assoc($result);
-            echo $row['username'];
-            echo $row['clearance'];
-        }
-        mysql_free_result($result);
+        // if (!$result) {
+        //     $message = 'Invalid query ' . mysql_error() . "\n";
+        //     $message .= "Whole query: " . $query;
+        //     echo $message;
+        //     return;
+        // } else {
+        //     $row = mysql_fetch_assoc($result);
+        //     echo $row['username'];
+        //     echo $row['clearance'];
+        // }
+        // mysql_free_result($result);
         $conn -> close();
     } else {
         echo "Incorrect Path from form action";
