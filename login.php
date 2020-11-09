@@ -22,7 +22,10 @@
 
         $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
 
-        $result = mysql_query($query);
+        echo $sql;
+        echo "<br>";
+
+        $result = $conn -> query($sql);
 
         echo "<br>";
         echo $result;
