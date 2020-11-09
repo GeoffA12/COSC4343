@@ -26,7 +26,8 @@
         if (!$result) {
             $message = 'Invalid query ' . mysql_error() . "\n";
             $message .= "Whole query: " . $query;
-            die($message);
+            echo $message;
+            return;
         } else {
             $row = mysql_fetch_assoc($result);
             echo $row['username'];
