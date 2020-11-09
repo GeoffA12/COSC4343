@@ -29,7 +29,7 @@
             while ($row = $result->fetch_assoc()) {
                 echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
             }
-            $rows= $result->fetch_assoc();
+            $rows= $result->fetch_row();
             $firstUser = $rows[0];
             echo "<br>";
             echo $firstUser;
