@@ -24,13 +24,8 @@
         $password = $_POST['password'];
 
         $hashPassword = sha1($password);
-        echo $username;
-
-        echo "<br>";
-        echo $hashPassword;
 
         $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
-        echo $sql;
 
         if ($result = $conn->query($sql)) {
             printf("Select returned %d rows.\n", $result->num_rows);
@@ -41,7 +36,8 @@
                 $clearanceLevel = $userRow["clearance"];
                 switch ($clearanceLevel) {
                     case 'C':
-                        echo "Clerance user logged in.";
+                        echo "Confidential user logged in.";
+                        break;
                     default:
                         echo "Unknown clearance user logged in.";
                 }
