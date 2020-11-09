@@ -6,7 +6,7 @@
         $dbname = 'cosc4343';
         $conn = new mysqli($dbhost, $dbuser, $dbpassword, $dbname);
 
-        if ($conn->connect_errno ) {
+        if ($conn->connect_error) {
             echo 'Failed to connect to mysql: ' . $conn->connect_error;
             die('Failed to connect to mysql');
         }
@@ -31,14 +31,14 @@
         echo "<br>";
         echo $result;
 
-        echo "Before the if block";
+        print('Before the if block');
         if ($result->num_rows > 0) {
             echo "result found";
             while ($row = $result->mysql_fetch_assoc()) {
                 echo "username: " . $row["username"] . "clearance: " . $row["clearance"] . "<br>";
             }
         } else {
-            echo "0 results found";
+            print('0 results found');
         }
         
         // if (!$result) {
