@@ -48,8 +48,6 @@
             print('Incorrect syntax, query failed.');
         }
         $conn -> close();
-    } else {
-        echo "Incorrect Path from form action";
     }
 ?>
 <body>
