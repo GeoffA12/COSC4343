@@ -22,6 +22,7 @@
 
         $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
 
+        echo "<br>";
         echo $sql;
         echo "<br>";
 
@@ -29,6 +30,14 @@
 
         echo "<br>";
         echo $result;
+
+        if ($result -> num_rows > 0) {
+            while ($row = $result -> mysql_fetch_assoc()) {
+                echo "username: " . $row["username"] . "clearance: " . $row["clearance"] . "<br>";
+            }
+        } else {
+            echo "0 results found";
+        }
         
         // if (!$result) {
         //     $message = 'Invalid query ' . mysql_error() . "\n";
