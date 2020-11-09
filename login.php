@@ -29,6 +29,10 @@
             while ($row = $result->fetch_assoc()) {
                 echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
             }
+            $rows= $result->fetch_assoc();
+            $firstUser = $rows[0];
+            echo "<br>";
+            echo $firstUser;
             $result->close();
         } else {
             print('No result found');
