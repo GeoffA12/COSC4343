@@ -17,11 +17,15 @@
         $hashPassword = sha1($password);
         echo $username;
 
+        echo "<br>";
         echo $hashPassword;
 
-        // $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
 
-        // $result = mysql_query($query);
+        $result = mysql_query($query);
+
+        echo "<br>";
+        echo $result;
         
         // if (!$result) {
         //     $message = 'Invalid query ' . mysql_error() . "\n";
