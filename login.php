@@ -30,6 +30,7 @@
             //     echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
             // }
             $userArray = $result->fetch_assoc();
+            echo $userArray["username"];
             $firstUser = $userArray[0];
             echo $firstUser;
             $result->close();
