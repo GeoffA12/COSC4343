@@ -30,12 +30,17 @@
             //     echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
             // }
             $userArray = $result->fetch_assoc();
-            echo $userArray["username"];
-            $firstUser = $userArray[0];
-            echo $firstUser;
+            if (!$userArray) {
+                echo "<h2>Invalid login</h2>";
+            }
+            else {
+                echo $userArray["username"];
+                echo "<br>";
+                echo $userArray["clearance"];
+            }
             $result->close();
         } else {
-            print('No result found');
+            print('Incorrect syntax, query failed.');
         }
         
         // if (!$result) {
