@@ -20,8 +20,8 @@
         echo "<br>";
         echo $hashPassword;
 
-        // $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
-        $sql = "SELECT * FROM useraccounts";
+        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+        // $sql = "SELECT * FROM useraccounts";
         echo $sql;
 
         if ($result = $conn->query($sql)) {
