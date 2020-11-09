@@ -26,7 +26,7 @@
         echo $sql;
         echo "<br>";
 
-        $result = $conn->query($sql);
+        $result = mysqli_query($conn, $sql);
 
         echo "<br>";
         echo $result;
