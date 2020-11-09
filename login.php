@@ -20,16 +20,13 @@
         echo "<br>";
         echo $hashPassword;
 
-        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
-
+        // $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+        $sql = "SELECT * FROM useraccounts";
         echo "<br>";
         echo $sql;
         echo "<br>";
 
         $result = mysqli_query($conn, $sql);
-
-        echo "<br>";
-        echo $result;
 
         print('Before the if block');
         if ($result->num_rows > 0) {
