@@ -1,5 +1,6 @@
 <?php
     if (isset($_POST['login'])) {
+        $baseUrl = 'http://104.131.161.220/COSC4343';
         $dbhost = 'localhost:3306';
         $dbuser = 'root';
         $dbpassword = 'COSC4343';
@@ -21,17 +22,14 @@
         echo $hashPassword;
 
         $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
-        // $sql = "SELECT * FROM useraccounts";
         echo $sql;
 
         if ($result = $conn->query($sql)) {
             printf("Select returned %d rows.\n", $result->num_rows);
-            // while ($row = $result->fetch_assoc()) {
-            //     echo "Username " . $row["username"] . "clearance: " . $row["clearance"];
-            // }
             $userArray = $result->fetch_assoc();
             if (!$userArray) {
-                readfile('badLogin.html');
+                $url = $baseUrl . '/badLogin.html';
+                redirect($url);
             }
             else {
                 echo $userArray["username"];
@@ -42,20 +40,13 @@
         } else {
             print('Incorrect syntax, query failed.');
         }
-        
-        // if (!$result) {
-        //     $message = 'Invalid query ' . mysql_error() . "\n";
-        //     $message .= "Whole query: " . $query;
-        //     echo $message;
-        //     return;
-        // } else {
-        //     $row = mysql_fetch_assoc($result);
-        //     echo $row['username'];
-        //     echo $row['clearance'];
-        // }
-        // mysql_free_result($result);
         $conn -> close();
     } else {
         echo "Incorrect Path from form action";
+    }
+
+    function redirect($url, $statusCode = 303) {
+        header('Location: ' . $url, true, $statusCode)
+        exit();
     }
 ?>
