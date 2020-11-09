@@ -22,15 +22,12 @@
 
         // $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
         $sql = "SELECT * FROM useraccounts";
-        echo "<br>";
         echo $sql;
-        echo "<br>";
 
-        $result = mysqli_query($conn, $sql);
-
-        $row = mysql_fetch_row($result);
-        $user = $row[0];
-        echo $user;
+        if ($result = $mysqli->query($sql)) {
+            printf("Select returned %d rows.\n", $result->num_rows);
+            $result->close();
+        }
         
         // if (!$result) {
         //     $message = 'Invalid query ' . mysql_error() . "\n";
