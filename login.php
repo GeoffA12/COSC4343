@@ -31,7 +31,7 @@
             // }
             $userArray = $result->fetch_assoc();
             if (!$userArray) {
-                echo "<h2>Invalid login</h2>";
+                return "Invalid login";
             }
             else {
                 echo $userArray["username"];
