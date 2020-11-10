@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Login</title>
+    <script src="checkCaptchaForm.js"></script>
+    <title>User Login Script</title>
 </head>
 <?php
     include 'redirect.php';
     if (isset($_POST['login'])) {
+        session_start();
+        if ($_POST['captcha'] != $_POST['digit']) {
+            echo "Sorry, the CAPTCHA code was entered incorrectly!";
+            die("Sorry, the CAPTCHA code was entered incorrectly!");
+        }
+        session_destroy();
+
         $baseUrl = 'http://104.131.161.220/COSC4343';
         $dbhost = 'localhost:3306';
         $dbuser = 'root';
@@ -63,8 +71,18 @@
     }
 ?>
 <body>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <table width="600" border ="0" cellspacing="1" cellpadding="2">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="return checkCaptchaForm(this);">
+        <table width="600" border ="1" cellspacing="1" cellpadding="2">
+            <tr>
+                <p>
+                    <img src="/captcha.php" width="120" height="30" border="1" alt="CAPTCHA">
+                </p>
+                <p>
+                    <input type="text" size="6" maxlength="5" name="captcha" value="">
+                    <br>
+                    <small>Copy the digits from the image into this box</small>
+                </p>
+            </tr>
             <tr>
                 <td width = "250">Username</td>
                 <td>
