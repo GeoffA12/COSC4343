@@ -11,8 +11,9 @@
     if (isset($_POST['login'])) {
         session_start();
         if ($_POST['captcha'] != $_POST['digit']) {
-            echo "Sorry, the CAPTCHA code was entered incorrectly!";
-            die("Sorry, the CAPTCHA code was entered incorrectly!");
+            echo "<h2>Incorrect Captcha Code!</h2>";
+            return;
+            // die("Sorry, the CAPTCHA code was entered incorrectly!");
         }
         session_destroy();
 
