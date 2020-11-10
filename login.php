@@ -9,66 +9,72 @@
 <?php
     include 'redirect.php';
     if (isset($_POST['login'])) {
+        if (!checkCaptchaDigits()) {
+            echo "<h2>Invalid Captcha code entered!</h2>";
+        } else {
+            $baseUrl = 'http://104.131.161.220/COSC4343';
+            $dbhost = 'localhost:3306';
+            $dbuser = 'root';
+            $dbpassword = 'COSC4343';
+            $dbname = 'cosc4343';
+            $conn = new mysqli($dbhost, $dbuser, $dbpassword, $dbname);
+
+            if ($conn->connect_error) {
+                echo 'Failed to connect to mysql: ' . $conn->connect_error;
+                die('Failed to connect to mysql');
+            }
+
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            $hashPassword = sha1($password);
+
+            $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
+
+            if ($result = $conn->query($sql)) {
+                $userRow = $result->fetch_assoc();
+                if (!$userRow) {
+                    echo "<h2>Invalid Login Credentials.</h2>";
+                } else {
+                    $clearanceLevel = $userRow["clearance"];
+                    switch ($clearanceLevel) {
+                        case 'T':
+                            $url = $baseUrl . '/TopSecret.html';
+                            redirect($url);
+                            break;
+                        case 'S':
+                            $url = $baseUrl . '/Secret.html';
+                            redirect($url);
+                            break;
+                        case 'C':
+                            $url = $baseUrl . '/Confidential.html';
+                            redirect($url);
+                            break;
+                        case 'U':
+                            $url = $baseUrl . '/Unclassified.html';
+                            redirect($url);
+                            break;
+                        default:
+                            echo "Unknown clearance user logged in.";
+                    }
+                    
+                }
+                $result->close();
+            } else {
+                print('Incorrect syntax, query failed.');
+            }
+            $conn -> close();
+        }
+    }
+
+    function checkCaptchaDigits() {
+        $isValid = true;
         session_start();
         if ($_POST['captcha'] != $_POST['digit']) {
-            echo "<h2>Incorrect Captcha Code!</h2>";
-            return;
-            // die("Sorry, the CAPTCHA code was entered incorrectly!");
+            $isValid = false;
         }
         session_destroy();
-
-        $baseUrl = 'http://104.131.161.220/COSC4343';
-        $dbhost = 'localhost:3306';
-        $dbuser = 'root';
-        $dbpassword = 'COSC4343';
-        $dbname = 'cosc4343';
-        $conn = new mysqli($dbhost, $dbuser, $dbpassword, $dbname);
-
-        if ($conn->connect_error) {
-            echo 'Failed to connect to mysql: ' . $conn->connect_error;
-            die('Failed to connect to mysql');
-        }
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $hashPassword = sha1($password);
-
-        $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
-
-        if ($result = $conn->query($sql)) {
-            $userRow = $result->fetch_assoc();
-            if (!$userRow) {
-                echo "<h2>Invalid Login Credentials.</h2>";
-            } else {
-                $clearanceLevel = $userRow["clearance"];
-                switch ($clearanceLevel) {
-                    case 'T':
-                        $url = $baseUrl . '/TopSecret.html';
-                        redirect($url);
-                        break;
-                    case 'S':
-                        $url = $baseUrl . '/Secret.html';
-                        redirect($url);
-                        break;
-                    case 'C':
-                        $url = $baseUrl . '/Confidential.html';
-                        redirect($url);
-                        break;
-                    case 'U':
-                        $url = $baseUrl . '/Unclassified.html';
-                        redirect($url);
-                        break;
-                    default:
-                        echo "Unknown clearance user logged in.";
-                }
-                
-            }
-            $result->close();
-        } else {
-            print('Incorrect syntax, query failed.');
-        }
-        $conn -> close();
+        return $isValid;
     }
 ?>
 <body>
