@@ -75,7 +75,7 @@
         <table width="600" border ="1" cellspacing="1" cellpadding="2">
             <tr>
                 <p>
-                    <img src="/captcha.php" width="120" height="30" border="1" alt="CAPTCHA">
+                    <img src="captcha.php" width="120" height="30" border="1" alt="CAPTCHA">
                 </p>
                 <p>
                     <input type="text" size="6" maxlength="5" name="captcha" value="">
