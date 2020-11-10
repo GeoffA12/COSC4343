@@ -71,6 +71,8 @@
         $isValid = true;
         session_start();
         if ($_POST['captcha'] != $_POST['digit']) {
+            echo $_POST['captcha'];
+            echo $_POST['digit'];
             $isValid = false;
         }
         session_destroy();
