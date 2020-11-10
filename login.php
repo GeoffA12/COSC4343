@@ -28,15 +28,26 @@
         $sql = "SELECT * FROM useraccounts WHERE username='$username' AND `password`='$hashPassword'";
 
         if ($result = $conn->query($sql)) {
-            // printf("Select returned %d rows.\n", $result->num_rows);
             $userRow = $result->fetch_assoc();
             if (!$userRow) {
                 echo "<h2>Invalid Login Credentials.</h2>";
             } else {
                 $clearanceLevel = $userRow["clearance"];
                 switch ($clearanceLevel) {
+                    case 'T':
+                        $url = $baseUrl . '/TopSecret.html';
+                        redirect($url);
+                        break;
+                    case 'S':
+                        $url = $baseUrl . '/Secret.html';
+                        redirect($url);
+                        break;
                     case 'C':
                         $url = $baseUrl . '/Confidential.html';
+                        redirect($url);
+                        break;
+                    case 'U':
+                        $url = $baseUrl . '/Unclassified.html';
                         redirect($url);
                         break;
                     default:
